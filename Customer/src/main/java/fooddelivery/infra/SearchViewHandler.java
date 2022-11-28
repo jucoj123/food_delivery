@@ -36,6 +36,24 @@ public class SearchViewHandler {
             e.printStackTrace();
         }
     }
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenDelivered_then_CREATE_2 (@Payload Delivered delivered) {
+        try {
+
+            if (!delivered.validate()) return;
+
+            // view 객체 생성
+            Search search = new Search();
+            // view 객체에 이벤트의 Value 를 set 함
+            search.setDeliverystatus(delivered.getStatus());
+            search.setDeliveryid(String.valueOf(delivered.getDeliveryid()));
+            // view 레파지 토리에 save
+            searchRepository.save(search);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
     @StreamListener(KafkaProcessor.INPUT)
