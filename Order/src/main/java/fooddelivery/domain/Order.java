@@ -75,6 +75,11 @@ public class Order  {
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
 
+        // Get request from Pay
+        //fooddelivery.external.Pay pay =
+        //    Application.applicationContext.getBean(fooddelivery.external.PayService.class)
+        //    .getPay(/** mapping value needed */);
+
     }
 
     public static OrderRepository repository(){
